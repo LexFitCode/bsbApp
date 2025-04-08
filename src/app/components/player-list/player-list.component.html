@@ -3,7 +3,7 @@
     @for (item of players; track item.name) {<div
 
       (click)="statsPlayer(item.name)"
-      class="playerCardMobile"
+      class="playerCardMobile" [ngClass]="item.name === activePlayer ? 'active' : ''"
     >
     <span class="playerName">{{ item.name }}</span>
     <span class="playerTeam"> {{ item.team }}</span>

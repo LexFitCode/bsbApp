@@ -1,5 +1,6 @@
 @if (position === "pitcher") {
 <div class="oddsWrapper">
+
     @if (odds.strikeOuts !== undefined) {
         <app-player-stats
         [a]="odds.strikeOuts?.line"
@@ -68,12 +69,12 @@
     [versus]="versus">
     </app-player-stats-hitter>
   }
-  @if (odds.stolenBases !== undefined) {
+  <!--/*@if (odds.stolenBases !== undefined) {
     <app-player-stats-hitter
     [stats] = "odds.stolenBases"
     [versus]="versus">
     </app-player-stats-hitter>
-  }
+  }-->
 
   @if (odds.bb !== undefined) {
     <app-player-stats-hitter

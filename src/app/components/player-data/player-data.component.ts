@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { PlayerStatsComponent } from '../player-stats/player-stats.component';
 import { PlayerStatsHitterComponent } from '../player-stats-hitter/player-stats-hitter.component';
-
+import {NgClass} from '@angular/common';
 @Component({
   selector: 'app-player-data',
   imports: [ PlayerStatsComponent, PlayerStatsHitterComponent],
@@ -28,5 +28,8 @@ export class PlayerDataComponent {
     this.oddData.vsPitcher = odd.vsPitcher
     this.oddData.vsPitcherThrow = odd.vsPitcherThrow
     this.oddData.hrr = odd.hrr
+  }
+  selectMarket(value: string){
+    console.log(value)
   }
 }

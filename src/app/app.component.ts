@@ -56,7 +56,6 @@ export class AppComponent implements OnInit {
   playerFromPlayer(player: any) {
     this.position = player.position
     this.getOdds(player.name);
-
   }
   playersToShow(position: string){
     console.log(this.players)
