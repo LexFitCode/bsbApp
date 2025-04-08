@@ -1,7 +1,7 @@
 {
   "name": "ppbsb",
   "version": "0.0.0",
-  "homepage": "https://lexfitcode.github.io/bsbApp/",
+  "homepage": "https://lexfitcode.github.io/bsbApp",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
