@@ -32,8 +32,10 @@
   (newItemEvent)="playersFromGames($event)"
   [mobile]="mobile"
   ></app-games>
-  @if(showSelect){<app-select-position
-(newItemEvent)="playersToShow($event)"></app-select-position>}
+  @if(showSelect){
+    <app-select-position
+      (newItemEvent)="playersToShow($event)"
+      ></app-select-position>}
   <app-player-list
   (newItemEvent)="playerFromPlayer($event)"
   [players]="playersToFollowPersonalData"
