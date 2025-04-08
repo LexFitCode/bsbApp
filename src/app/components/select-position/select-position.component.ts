@@ -1,3 +1,4 @@
+import { UpperCasePipe } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {MatRadioModule} from '@angular/material/radio';
 @Component({

@@ -1,9 +1,10 @@
 .oddsButton{
   height: 235px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
+  text-align: center;
   margin: 10px;
   padding: 10px;
   color: white;
@@ -17,7 +18,7 @@
 
 .gamesData{
   display: flex;
-
+  flex-direction: column;
 }
 
 .gamesData div {
