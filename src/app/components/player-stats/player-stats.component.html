@@ -24,26 +24,26 @@
     <div class="gamesData">
       <h4>Ultimos 5 juegos</h4>
       <div>
-        <div>{{ games?.game1 }}</div>
-        <div>{{ games?.game2 }}</div>
-        <div>{{ games?.game3 }}</div>
-        <div>{{ games?.game4 }}</div>
-        <div>{{ games?.game5 }}</div>
+        <div [ngClass]="games?.game1 > a ? 'cover' : ''">{{ games?.game1 }}</div>
+        <div [ngClass]="games?.game2 > a ? 'cover' : ''">{{ games?.game2 }}</div>
+        <div [ngClass]="games?.game3 > a ? 'cover' : ''">{{ games?.game3 }}</div>
+        <div [ngClass]="games?.game4 > a ? 'cover' : ''">{{ games?.game4 }}</div>
+        <div [ngClass]="games?.game5 > a ? 'cover' : ''">{{ games?.game5 }}</div>
       </div>
     </div>
     <div class="gamesData">
       <h4> ultimos juegos vs </h4>
       <div>
         @if (gamesVs?.game1 !== ""){
-        <div>{{ gamesVs?.game1 }}</div>
+        <div div [ngClass]="gamesVs?.game1 > a ? 'cover' : ''">{{ gamesVs?.game1 }}</div>
         } @if (gamesVs?.game2 !== ""){
-        <div>{{ gamesVs?.game2 }}</div>
+        <div div [ngClass]="gamesVs?.game2 > a ? 'cover' : ''">{{ gamesVs?.game2 }}</div>
         } @if (gamesVs?.game3 !== ""){
-        <div>{{ gamesVs?.game3 }}</div>
+        <div div [ngClass]="gamesVs?.game3 > a ? 'cover' : ''">{{ gamesVs?.game3 }}</div>
         } @if (gamesVs?.game4 !== ""){
-        <div>{{ gamesVs?.game4 }}</div>
+        <div div [ngClass]="gamesVs?.game4 > a ? 'cover' : ''">{{ gamesVs?.game4 }}</div>
         } @if (gamesVs?.game5 !== ""){
-        <div>{{ gamesVs?.game5 }}</div>
+        <div div [ngClass]="gamesVs?.game5 > a ? 'cover' : ''">{{ gamesVs?.game5 }}</div>
         }
       </div>
       </div>

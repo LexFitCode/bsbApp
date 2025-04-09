@@ -34,7 +34,16 @@
   border-radius: 10px;
   border: 1px solid rgba( 255, 255, 255, 0.18 );
 }
-
+.horizontal-scroll-wrapper-web{
+  width: 100%;
+  height: 15%;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow: auto;
+}
+.horizontal-scroll-wrapper-web > div {
+  flex: 0 0 auto;
+}
 .horizontal-scroll-wrapper {
   width: 100%;
   height: 12%;

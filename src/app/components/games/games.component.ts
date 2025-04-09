@@ -24,17 +24,14 @@ export class GamesComponent implements OnInit{
   setIconsApi(){
     this.PlayersService.getPlayers().subscribe((data)=>{
       this.playersIcons = data
-      console.log(data)
     })
   }
   setIconsApiPitchers(){
     this.PlayersService.getPlayersHitters().subscribe((data)=>{
       this.playersIconsHitter = data
-      console.log(data)
     })
   }
   playersToFollow(home: string, away: string) {
-    console.log(home, away)
     this.playersToFollowPersonalData = {}
     this.playersToFollowPersonalData.hitters = []
     this.playersToFollowPersonalData.pitchers = []

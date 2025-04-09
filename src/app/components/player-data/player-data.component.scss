@@ -1,5 +1,4 @@
 .oddWrapper{
-  display: flex;
   margin: 10px;
   min-height: 65px;
   justify-content: center;
@@ -39,7 +38,7 @@ border: 1px solid rgba(133,158,118,0.25);
 
 .oddsWrapper{
   display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(300px, 360px));
+  grid-template-columns: repeat(auto-fit,minmax(360px, 420px));
 }
 
 .oddsButton{

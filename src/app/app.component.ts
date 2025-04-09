@@ -33,7 +33,6 @@ export class AppComponent implements OnInit {
   ){}
   ngOnInit(): void {
     this.setGamesBsbApi()
-    console.log(this.players)
     //this.games = Object.values(games) //offline
   }
   setGamesBsbApi(){
@@ -43,7 +42,6 @@ export class AppComponent implements OnInit {
     if(window.screen.width<415){
       this.mobile =  true
     }
-    console.log(this.mobile)
   }
 
   playersFromGames(players: any) {
@@ -58,8 +56,7 @@ export class AppComponent implements OnInit {
     this.getOdds(player.name);
   }
   playersToShow(position: string){
-    console.log(this.players)
-    console.log(position)
+
     this.position = position
     if (position === "pitcher"){
       this.playersToFollowPersonalData = this.players.pitchers
@@ -67,8 +64,7 @@ export class AppComponent implements OnInit {
     } else {
       this.playersToFollowPersonalData = this.players.hitters
     }
-    console.log(this.playersToFollowPersonalData)
-    console.log(this.position)
+
   }
   getOdds(name: string) {
     this.namePlayer = name
@@ -88,7 +84,6 @@ export class AppComponent implements OnInit {
     }
 
 
-    console.log(this.playerOddsB, this.playerOddsB.length)
   }
   getStats(games: any){
     const lastFive:any = []
@@ -136,8 +131,6 @@ export class AppComponent implements OnInit {
     return lastFive
   }
   getStatsHitters(games: any){
-    console.log(games.game3)
-    console.log(games.game3.runs3)
     const lastFive:any = []
     if(games.game1 !== undefined){
       lastFive.strikeOuts = []
@@ -209,7 +202,6 @@ export class AppComponent implements OnInit {
       lastFive.hrr.game5 = hrr5 !== undefined ? hrr5 : ""
 
     }
-    console.log(lastFive)
     return lastFive
   }
 
@@ -281,6 +273,7 @@ export class AppComponent implements OnInit {
       vsP.threeb = []
       vsP.twoB = []
       vsP.runs = []
+      vsP.hhr = []
       vsP.hits          = games.Hits !== ""        ? games.Hits : ""
       vsP.atBat = []
       vsP.atBat         = games.atBat !== ""        ? games.atBat : ""
@@ -292,22 +285,21 @@ export class AppComponent implements OnInit {
       vsP.homeRun       = games.homeRun !== ""     ? games.homeRun : ""
       vsP.runsBattedIn  = games.runsBattedIn !== "" ? games.runsBattedIn : ""
       vsP.strikeOuts    = games.strikeOut !== "" ? games.strikeOut : ""
-
+      vsP.runs = games.runs !== "" ? games.runs : ""
+      vsP.hhr = parseInt(vsP.hits, 10) + parseInt(vsP.runsBattedIn, 10)
       vsP.threeb        = games.threeb !== ""      ? games.threeb : ""
       vsP.twoB          = games.twoB !== ""        ? games.twoB : ""
-      console.log(vsP)
     return vsP
   }
   setOddsHitter(dataOdds: any) {
     let lastFive
-    console.log(dataOdds)
     this.vs = {"rival" :dataOdds.pitcherRival, "throw": dataOdds.pitcherRivalThrow}
     this.team = dataOdds.team
     const vsPitcher =this.getStatsHittersOneLine(dataOdds.vsPitcher)
     if(dataOdds.lastFive !== undefined){
       lastFive = this.getStatsHitters(dataOdds.lastFive.games)
     }
-    const vsPitcherThrow =this.getStatsHittersOneLine(dataOdds.vsPitcherThrow)
+    const vsPitcherThrow = this.getStatsHittersOneLine(dataOdds.vsPitcherThrow)
     const dataOddsB = dataOdds.odds
     this.namePlayer = dataOdds.name
      this.playerOddsB = []
@@ -320,8 +312,8 @@ export class AppComponent implements OnInit {
             overOdd: dataOddsB[property].overOdd,
             underOdd: dataOddsB[property].underOdd,
             games: lastFive?.homeRun,
-            vsPitcher: {games:vsPitcher.games, stats: vsPitcher.homeRun},
-            vsPitcherThrow:  {games:vsPitcherThrow.games, stats: vsPitcherThrow.homeRun}
+            vsPitcher: {games:vsPitcher.games, stats: vsPitcher.homeRun,atBat:vsPitcher.atBat},
+            vsPitcherThrow:  {games:vsPitcherThrow.games, stats: vsPitcherThrow.homeRun,atBat:vsPitcherThrow.atBat}
           });
         break;
         case 'Bateador - Base por bolas (+/-)':
@@ -331,8 +323,8 @@ export class AppComponent implements OnInit {
             overOdd: dataOddsB[property].overOdd,
             underOdd: dataOddsB[property].underOdd,
             games: lastFive?.baseXBolas,
-            vsPitcher: {games:vsPitcher.games, stats: vsPitcher.baseXBola},
-            vsPitcherThrow:  {games:vsPitcherThrow.games, stats: vsPitcherThrow.baseXBola}
+            vsPitcher: {games:vsPitcher.games, stats: vsPitcher.baseXBola,atBat:vsPitcher.atBat},
+            vsPitcherThrow:  {games:vsPitcherThrow.games, stats: vsPitcherThrow.baseXBola,atBat:vsPitcherThrow.atBat}
             });
           break;
         case 'Total de bases (+/-)':
@@ -343,8 +335,8 @@ export class AppComponent implements OnInit {
             underOdd: dataOddsB[property].underOdd,
             games: lastFive?.twoB,
             gamesB:lastFive?.threeb,
-            vsPitcher: {games:vsPitcher.games, stats: vsPitcher.hits},
-            vsPitcherThrow:  {games:vsPitcherThrow.games, stats: vsPitcherThrow.hits}
+            vsPitcher: {games:vsPitcher.games, stats: vsPitcher.hits,atBat:vsPitcher.atBat},
+            vsPitcherThrow:  {games:vsPitcherThrow.games, stats: vsPitcherThrow.hits,atBat:vsPitcherThrow.atBat}
           });
           break;
         case 'Hits (+/-)':
@@ -354,8 +346,8 @@ export class AppComponent implements OnInit {
             overOdd: dataOddsB[property].overOdd,
             underOdd: dataOddsB[property].underOdd,
             games: lastFive?.hits,
-            vsPitcher: {games:vsPitcher.games, stats: vsPitcher.hits},
-            vsPitcherThrow:  {games:vsPitcherThrow.games, stats: vsPitcherThrow.hits}
+            vsPitcher: {games:vsPitcher.games, stats: vsPitcher.hits, avg: vsPitcher.avg,atBat:vsPitcher.atBat},
+            vsPitcherThrow:  {games:vsPitcherThrow.games, stats: vsPitcherThrow.hits, avg: vsPitcherThrow.avg,atBat:vsPitcherThrow.atBat}
           });
           break;
         case 'Carreras impulsadas (+/-)':
@@ -365,8 +357,8 @@ export class AppComponent implements OnInit {
             overOdd: dataOddsB[property].overOdd,
             underOdd: dataOddsB[property].underOdd,
             games: lastFive?.runsBattedIn,
-            vsPitcher: {games:vsPitcher.games, stats: vsPitcher.runsBattedIn},
-            vsPitcherThrow:  {games:vsPitcherThrow.games, stats: vsPitcherThrow.runsBattedIn}
+            vsPitcher: {games:vsPitcher.games, stats: vsPitcher.runsBattedIn,atBat:vsPitcher.atBat},
+            vsPitcherThrow:  {games:vsPitcherThrow.games, stats: vsPitcherThrow.runsBattedIn,atBat:vsPitcherThrow.atBat}
           });
           break;
         case 'Carreras (+/-)':
@@ -376,8 +368,8 @@ export class AppComponent implements OnInit {
             overOdd: dataOddsB[property].overOdd,
             underOdd: dataOddsB[property].underOdd,
             games: lastFive?.runs,
-            vsPitcher: {games:vsPitcher.games, stats: vsPitcher.hits},
-            vsPitcherThrow:  {games:vsPitcherThrow.games, stats: vsPitcherThrow.hits}
+            vsPitcher: {games:vsPitcher.games, stats: vsPitcher.hits,atBat:vsPitcher.atBat},
+            vsPitcherThrow:  {games:vsPitcherThrow.games, stats: vsPitcherThrow.hits,atBat:vsPitcherThrow.atBat}
           });
           break;
         case 'Bases robadas (+/-)':
@@ -386,8 +378,8 @@ export class AppComponent implements OnInit {
             line: dataOddsB[property].line,
             overOdd: dataOddsB[property].overOdd,
             underOdd: dataOddsB[property].underOdd,
-            vsPitcher: {games:vsPitcher.games, stats: vsPitcher.hits},
-            vsPitcherThrow:  {games:vsPitcherThrow.games, stats: vsPitcherThrow.hits}
+            vsPitcher: {games:vsPitcher.games, stats: vsPitcher.hits, atBat:vsPitcher.atBat},
+            vsPitcherThrow:  {games:vsPitcherThrow.games, stats: vsPitcherThrow.hits,atBat:vsPitcherThrow.atBat}
 
           });
           break;
@@ -397,8 +389,8 @@ export class AppComponent implements OnInit {
             line: dataOddsB[property].line,
             overOdd: dataOddsB[property].overOdd,
             underOdd: dataOddsB[property].underOdd,
-            vsPitcher: {games:vsPitcher.games, stats: vsPitcher.hits},
-            vsPitcherThrow:  {games:vsPitcherThrow.games, stats: vsPitcherThrow.hits},
+            vsPitcher: {games:vsPitcher.games, stats: vsPitcher.hhr,atBat:vsPitcher.atBat},
+            vsPitcherThrow:  {games:vsPitcherThrow.games, stats: vsPitcherThrow.hhr,atBat:vsPitcherThrow.atBat},
             games: lastFive?.hrr
           });
           break;
@@ -409,8 +401,8 @@ export class AppComponent implements OnInit {
                 overOdd: dataOddsB[property].overOdd,
                 underOdd: dataOddsB[property].underOdd,
                 games: lastFive?.strikeOuts,
-                vsPitcher: {games:vsPitcher.games, stats: vsPitcher.strikeOuts},
-                vsPitcherThrow:  {games:vsPitcherThrow.games, stats: vsPitcherThrow.strikeOuts}
+                vsPitcher: {games:vsPitcher.games, stats: vsPitcher.strikeOuts,atBat:vsPitcher.atBat},
+                vsPitcherThrow:  {games:vsPitcherThrow.games, stats: vsPitcherThrow.strikeOuts,atBat:vsPitcherThrow.atBat}
                 });
               break;
         default:
@@ -418,7 +410,6 @@ export class AppComponent implements OnInit {
       }
     }
     console.log(this.playerOddsB)
-
   }
   setLogo(data: any){
     data.forEach( (element : any) => {

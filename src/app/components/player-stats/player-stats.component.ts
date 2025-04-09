@@ -1,8 +1,9 @@
+import { NgClass } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-player-stats',
-  imports: [],
+  imports: [NgClass],
   templateUrl: './player-stats.component.html',
   styleUrl: './player-stats.component.scss'
 })

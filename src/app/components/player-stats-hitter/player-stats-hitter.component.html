@@ -27,23 +27,25 @@
   <div class="gamesData">
     <h4>Ultimos 5 juegos</h4>
     <div>
-      <div>{{ stats.games?.game1 }}</div>
-      <div>{{ stats.games?.game2 }}</div>
-      <div>{{ stats.games?.game3 }}</div>
-      <div>{{ stats.games?.game4 }}</div>
-      <div>{{ stats.games?.game5 }}</div>
+      <div [ngClass]="stats.games?.game1 > stats.line ? 'cover' : ''">{{ stats.games?.game1 }}</div>
+      <div [ngClass]="stats.games?.game2 > stats.line ? 'cover' : ''">{{ stats.games?.game2 }}</div>
+      <div [ngClass]="stats.games?.game3 > stats.line ? 'cover' : ''">{{ stats.games?.game3 }}</div>
+      <div [ngClass]="stats.games?.game4 > stats.line ? 'cover' : ''">{{ stats.games?.game4 }}</div>
+      <div [ngClass]="stats.games?.game5 > stats.line ? 'cover' : ''">{{ stats.games?.game5 }}</div>
     </div>
   </div>
   <div class="gamesDataPitcher">
     <div>
       @if (stats.vsPitcher.games !== ""){<span class="dataPitcher">Vs {{versus.rival}}</span>}
-      <span class="dataPitcher">{{ stats.vsPitcher?.games }}</span>
-      <span class="dataPitcher">{{ stats.vsPitcher?.stats }}</span>
+      @if (stats.vsPitcher.games !== ""){<span class="dataPitcher">{{ stats.vsPitcher?.games }}</span>}
+      @if (stats.vsPitcher.games !== ""){<span class="dataPitcher">{{ stats.vsPitcher?.stats }}/{{ stats.vsPitcher?.atBat }}</span>}
+      @if (stats.vsPitcher.games !== ""){<span class="dataPitcher">{{ stats.vsPitcher?.avg }}</span>}
     </div>
     <div>
-      <span class="dataPitcher">Vs {{versus.throw}}</span>
-      <span class="dataPitcher">{{ stats.vsPitcherThrow?.games }}</span>
-      <span class="dataPitcher">{{ stats.vsPitcherThrow?.stats }}</span>
+      @if (stats.vsPitcherThrow.games !== ""){<span class="dataPitcher">Vs {{versus.throw}}</span>}
+      @if (stats.vsPitcherThrow.games !== ""){<span class="dataPitcher">{{ stats.vsPitcherThrow?.games }}</span>}
+      @if (stats.vsPitcherThrow.games !== ""){<span class="dataPitcher">{{ stats.vsPitcherThrow?.stats }}/{{ stats.vsPitcherThrow?.atBat }}</span>}
+      @if (stats.vsPitcherThrow.games !== ""){<span class="dataPitcher">{{ stats.vsPitcherThrow?.avg }}</span>}
     </div>
   </div>
 </div>
